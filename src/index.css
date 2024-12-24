@@ -6,3 +6,17 @@
 /* Secondary - #aed6dc */
 
 
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333f60;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #aed6dc;
+  border-radius: 10px;
+}
