@@ -6,45 +6,41 @@ import Header from "./templates/Header";
 
 const Home = () => {
   document.title = "Spotlight | Homepage";
-
-  const [wallpaper, setWallpaper] = useState(null);
-  const [loading, setLoading] = useState(true);
-
+  const [wallpaper, setwallpaper] = useState(null);
   const GetHeaderWallpaper = async () => {
     try {
-      const { data } = await axios.get('/trending/all/day');
-      const indexNumber = Math.min(
-        Math.floor(Math.random() * 20),
-        data.results.length - 1
-      );
+        const { data } = await axios.get('/trending/all/day');
+        // Ensure the random number is between 0 and 20
+        let indexNumber = Math.floor(Math.random() * 20); // Generates 0 to 20 (inclusive)
 
-      setWallpaper(data.results[indexNumber]);
+        if (indexNumber >= data.results.length) {
+            indexNumber = data.results.length - 1; // Fallback to avoid out-of-bound errors
+        }
+
+        let randomdata = data.results[indexNumber];
+        setwallpaper(randomdata);
     } catch (err) {
-      console.error("Error fetching wallpaper:", err);
-    } finally {
-      setLoading(false);
+        console.log("Error: ", err);
     }
-  };
+};
 
+
+//   console.log(wallpaper);   
+  
   useEffect(() => {
-    GetHeaderWallpaper();
+    !wallpaper && GetHeaderWallpaper();
   }, []);
 
-  return (
+
+  return(
     <>
       <Sidenav />
-      <div className="w-[80%] h-full">
+      <div className="w-[80%] h-full ">
         <Topnav />
-        {loading ? (
-          <div className="flex items-center justify-center h-full">
-            <p>Loading...</p>
-          </div>
-        ) : (
-          <Header data={wallpaper} />
-        )}
+        <Header data={wallpaper}/>
       </div>
     </>
-  );
+  )
 };
 
 export default Home;
