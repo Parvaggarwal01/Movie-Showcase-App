@@ -32,7 +32,7 @@ const Home = () => {
   }, []);
 
 
-  return wallpaper ? (
+  return(
     <>
       <Sidenav />
       <div className="w-[80%] h-full ">
@@ -40,7 +40,7 @@ const Home = () => {
         <Header data={wallpaper}/>
       </div>
     </>
-  ) : <h1>Loading</h1>;
+  )
 };
 
 export default Home;
