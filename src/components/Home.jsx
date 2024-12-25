@@ -12,7 +12,7 @@ const Home = () => {
       const { data } = await axios.get(`/trending/all/day`);
     //   console.log(data);
       
-      let indexNumber = (Math.random()*data.results.length).toFixed();
+    let indexNumber = Math.floor(Math.random() * 20);
     //   console.log(indexNumber);
       
       let randomdata = data.results[indexNumber];
