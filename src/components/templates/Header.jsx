@@ -14,7 +14,7 @@ const Header = ({ data }) => {
       }}
       className="w-full h-[50vh]"
     >
-      Header
+      Hewlloo Danishhh 
     </div>
   );
 };

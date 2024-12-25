@@ -9,20 +9,20 @@ const Home = () => {
   const [wallpaper, setwallpaper] = useState(null);
   const GetHeaderWallpaper = async () => {
     try {
-      const { data } = await axios.get(`/trending/all/day`);
-    //   console.log(data);
-      
-      let indexNumber = (Math.random()*data.results.length).toFixed();
-    //   console.log(indexNumber);
-      
-      let randomdata = data.results[indexNumber];
-    //   console.log(r);
-      
-      setwallpaper((randomdata));
+        const { data } = await axios.get('/trending/all/day');
+        // Ensure the random number is between 0 and 20
+        let indexNumber = Math.floor(Math.random() * 20); // Generates 0 to 20 (inclusive)
+
+        if (indexNumber >= data.results.length) {
+            indexNumber = data.results.length - 1; // Fallback to avoid out-of-bound errors
+        }
+
+        let randomdata = data.results[indexNumber];
+        setwallpaper(randomdata);
     } catch (err) {
-      console.log("Error: ", err);
+        console.log("Error: ", err);
     }
-  };
+};
 
 
 //   console.log(wallpaper);   
