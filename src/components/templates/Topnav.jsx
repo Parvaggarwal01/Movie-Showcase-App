@@ -10,7 +10,7 @@ const Topnav = () => {
   const GetSearches = async () => {
     try {
       const { data } = await axios.get(`/search/multi?query=${query}`);
-      console.log(data.results);
+      // console.log(data.results);
       setsearches(data.results);
     } catch (err) {
       console.log("Error: ", err);
@@ -38,29 +38,35 @@ const Topnav = () => {
         ></i>
       )}
 
-      <div className="absolute w-[50%]  max-h-[50vh]  top-[90%] overflow-auto rounded-lg ">
-        {searches.map((s, i) => (
-          <Link
-            key={i}
-            className="text-zinc-400 hover:text-[#4a536b] hover:bg-[#aed6dc] duration-300 font-semibold inline-block w-[100%] p-10 flex justify-start items-center border-b-2 border-zinc-100"
-          >
-            <img
-              className="w-[10vh] h-[10vh] object-cover rounded mr-6 shadow-lg"
-              src={
-                s.backdrop_path || s.profile_path
-                  ? `https://image.tmdb.org/t/p/original/${
-                      s.backdrop_path || s.profile_path
-                    }`
-                  : noimage
-              }
-              alt=""
-            />
-            <span >
-              {s.name || s.title || s.original_name || s.original_title}
-            </span>
-          </Link>
-        ))}
-      </div>
+      {query.length > 0 && (
+        <div className="absolute w-[50%] max-h-[50vh] bg-zinc-200 top-[90%] overflow-auto rounded-lg shadow-lg z-10">
+          {searches.length > 0 ? (
+            searches.map((s, i) => (
+              <Link
+                key={i}
+                className="text-zinc-400 hover:text-[#4a536b] hover:bg-[#aed6dc] duration-300 font-semibold inline-block w-full px-4 py-3 flex justify-start items-center border-b border-zinc-100"
+              >
+                <img
+                  className="w-[8vh] h-[8vh] object-cover rounded mr-4 shadow-lg"
+                  src={
+                    s.backdrop_path || s.profile_path
+                      ? `https://image.tmdb.org/t/p/original/${
+                          s.backdrop_path || s.profile_path
+                        }`
+                      : noimage
+                  }
+                  alt=""
+                />
+                <span className="truncate w-[80%] ">
+                  {s.name || s.title || s.original_name || s.original_title}
+                </span>
+              </Link>
+            ))
+          ) : (
+            <p className="text-zinc-400 text-center py-3">No Result Found</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
