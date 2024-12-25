@@ -1,12 +1,12 @@
 {
-  "homepage": "https://Parvaggarwal01.github.io/Movie-Showcase-App",
+  "homepage": "https://parvaggarwal01.github.io/Movie-Showcase-App",
   "name": "movie-showcase-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "vite build",
+    "deploy": "gh-pages -d dist -m 'Deploy React app to GitHub Pages'",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
