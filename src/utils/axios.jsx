@@ -5,7 +5,7 @@ const instance = axios.create({
   headers: {
     accept: "application/json",
     Authorization:
-      `Bearer ${process.env.REACT_APP_TMDB_TOKEN}`,
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTY3MzkwYTRhZDQxNDE2NjVkODhmMTI3NzllZTdjNCIsIm5iZiI6MTczNTEyODY3Ni42MDA5OTk4LCJzdWIiOiI2NzZiZjY2NDI0OGM5MmUzZWZhOWVhNzQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.UmNmHxKgEaIB90_lLufn8zJwBkTpZJ86-S-zTX24eDk",
   },
 });
 
