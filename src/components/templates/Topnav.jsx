@@ -9,7 +9,7 @@ const Topnav = () => {
 
   const GetSearches = async () => {
     try {
-      const { data } = await axios.get(`/search/multi?api_key=${import.meta.env.VITE_REACT_APP_TMDB_API_KEY}&query=${query}`);
+      const { data } = await axios.get(`/search/multi?api_key=${import.meta.env.VITE_REACT_APP_TMDB_API}&query=${query}`);
       // console.log(data.results);
       setsearches(data.results);
     } catch (err) {

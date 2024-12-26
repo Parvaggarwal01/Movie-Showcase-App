@@ -14,7 +14,7 @@ const Home = () => {
   const [category, setcategory] = useState("all");
   const GetHeaderWallpaper = async () => {
     try {
-      const { data } = await axios.get(`/trending/all/day?api_key=${import.meta.env.VITE_REACT_APP_TMDB_API_KEY}`);
+      const { data } = await axios.get(`/trending/all/day?api_key=${import.meta.env.VITE_REACT_APP_TMDB_API}`);
       //   console.log(data);
 
       let indexNumber = Math.floor(Math.random() * 20);
@@ -31,7 +31,7 @@ const Home = () => {
 
   const GetTrending = async () => {
     try {
-      const { data } = await axios.get(`/trending/${category}/day?api_key=${import.meta.env.VITE_REACT_APP_TMDB_API_KEY}`);
+      const { data } = await axios.get(`/trending/${category}/day?api_key=${import.meta.env.VITE_REACT_APP_TMDB_API}`);
         console.log(data);
         
       settrending(data.results);
