@@ -14,7 +14,7 @@ const Home = () => {
   const [category, setcategory] = useState("all");
   const GetHeaderWallpaper = async () => {
     try {
-      const { data } = await axios.get(`/trending/all/day?api_key=c167390a4ad4141665d88f12779ee7c4`);
+      const { data } = await axios.get(`/trending/all/day`);
       //   console.log(data);
 
       let indexNumber = Math.floor(Math.random() * 20);
@@ -31,7 +31,7 @@ const Home = () => {
 
   const GetTrending = async () => {
     try {
-      const { data } = await axios.get(`/trending/${category}/day?api_key=c167390a4ad4141665d88f12779ee7c4`);
+      const { data } = await axios.get(`/trending/${category}/day`);
         console.log(data);
         
       settrending(data.results);

@@ -9,7 +9,7 @@ const Topnav = () => {
 
   const GetSearches = async () => {
     try {
-      const { data } = await axios.get(`/search/multi?api_key=c167390a4ad4141665d88f12779ee7c4&query=${query}`);
+      const { data } = await axios.get(`/search/multi&query=${query}`);
       // console.log(data.results);
       setsearches(data.results);
     } catch (err) {
