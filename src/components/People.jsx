@@ -2,25 +2,24 @@ import React, { useEffect, useState } from "react";
 import axios from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 import Topnav from "./templates/Topnav";
-import Dropdown from "./templates/Dropdown";
 import Loading from "./Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Cards from "./templates/Cards";
 
-const Tvshows = () => {
-  document.title = "Spotlight | TvShows ";
+const People = () => {
+  document.title = "Spotlight | Peoples";
   const navigate = useNavigate();
-  const [category, setcategory] = useState("airing_today");
-  const [tv, settv] = useState([]);
+  const [category, setcategory] = useState("popular");
+  const [people, setpeople] = useState([]);
   const [page, setpage] = useState(1);
   const [hasMore, sethasMore] = useState(true);
 
-  const GetTv = async () => {
+  const GetPerson = async () => {
     try {
-      const { data } = await axios.get(`/tv/${category}?page=${page}`);
+      const { data } = await axios.get(`/person/${category}?page=${page}`);
 
       if (data.results.length > 0) {
-        settv((prevState) => [...prevState, ...data.results]);
+        setpeople((prevState) => [...prevState, ...data.results]);
         setpage(page + 1);
       } else {
         sethasMore(false);
@@ -33,12 +32,12 @@ const Tvshows = () => {
   };
 
   const refershHandler = async () => {
-    if (tv.length === 0) {
-      GetTv();
+    if (people.length === 0) {
+      GetPerson();
     } else {
       setpage(1);
-      settv([]);
-      GetTv();
+      setpeople([]);
+      GetPerson();
     }
   };
 
@@ -46,8 +45,7 @@ const Tvshows = () => {
     refershHandler();
   }, [category]);
 
-  
-  return tv.length > 0 ? (
+  return people.length > 0 ? (
     <div className="w-screen h-screen ">
       <div className="px-[5%] w-full flex items-center justify-between mb-7 ">
         <h1 className="text-2xl font-semibold text-zinc-400 ">
@@ -55,27 +53,22 @@ const Tvshows = () => {
             onClick={() => navigate(-1)}
             className="hover:text-[#aed6dc] ri-arrow-left-line"
           ></i>{" "}
-          Tv Shows
-          <small className="ml-2 text-sm text-zinc-500">({category})</small>
+          Peoples
+          {/* <small className="ml-2 text-sm text-zinc-500">({category})</small> */}
         </h1>
         <div className="flex items-center w-[80%]">
           <Topnav />
-          <Dropdown
-            title="Category"
-            options={["popular", "top_rated", "on_the_air", "airing_today"]}
-            func={(e) => setcategory(e.target.value)}
-          />
           <div className="w-[2%]"></div>
         </div>
       </div>
 
       <InfiniteScroll
-        dataLength={tv.length}
-        next={GetTv}
+        dataLength={people.length}
+        next={GetPerson}
         hasMore={hasMore}
         loader={<Loading />}
       >
-        <Cards data={tv} title={category} />
+        <Cards data={people} title={category} />
       </InfiniteScroll>
     </div>
   ) : (
@@ -83,4 +76,4 @@ const Tvshows = () => {
   );
 };
 
-export default Tvshows;
+export default People;
