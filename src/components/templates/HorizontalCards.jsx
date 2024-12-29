@@ -6,7 +6,7 @@ const HorizontalCards = ({ data }) => {
   return (
     <div className="w-[100%]  flex overflow-y-hidden mb-5 p-3">
       {data.map((d, i) => (
-        <div key={i} className="min-w-[18%] mr-5 mb-5 bg-[#2f3649]">
+        <Link to={`/${d.media_type}/details/${d.id}`} key={i} className="min-w-[18%] mr-5 mb-5 bg-[#2f3649]">
           <img
             className="w-full h-[45%]  object-cover"
             src={`https://image.tmdb.org/t/p/original/${
@@ -23,7 +23,7 @@ const HorizontalCards = ({ data }) => {
               <span className="cursor-pointer text-zinc-500">more</span>
             </p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

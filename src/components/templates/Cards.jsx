@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 import noimage from "/noimage.png";
 
 const Cards = ({ data, title }) => {
+  console.log(title);
+
   return (
     <div className="flex flex-wrap w-full h-full px-[3%] justify-between bg-[#4a536b]">
       {data.map((d, i) => (
-        <Link className="relative w-[26vh] mr-[5%] mb-[5%]" key={i}>
+        <Link
+          to={`/${d.media_type || title}/details/${d.id}`}
+          className="relative w-[26vh] mr-[5%] mb-[5%]"
+          key={i}
+        >
           <img
             className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[35vh] object-cover"
             src={`https://image.tmdb.org/t/p/original/${
