@@ -15,9 +15,9 @@ const Cards = ({ data, title }) => {
         >
           <img
             className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[35vh] object-cover"
-            src={`https://image.tmdb.org/t/p/original/${
+            src={d.poster_path || d.backdrop_path || d.profile_path ? `https://image.tmdb.org/t/p/original/${
               d.poster_path || d.backdrop_path || d.profile_path
-            }`}
+            }` : noimage}
             alt=""
           />
           <h1 className="text-lg text-zinc-100 mt-3 font-semibold">

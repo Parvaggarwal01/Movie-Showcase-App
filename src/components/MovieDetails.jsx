@@ -1,7 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asynccloadmovie, removemovie } from "../store/actions/movieActions";
-import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import Loading from "./Loading";
 import HorizontalCards from "../components/templates/HorizontalCards";
 
@@ -20,19 +26,18 @@ const MovieDetails = () => {
   }, [dispatch, id]);
 
   return info ? (
-    <div style={{
-      background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(https://image.tmdb.org/t/p/original/${
-        info.details.backdrop_path || info.details.profile_path
-      })`,
-      backgroundPosition: "center",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      // filter: "blur(4px)",
-    }} className="relative h-[155vh] w-screen px-[5%] ">
-      {/* <div
-        
-        className="absolute inset-0 z-0"
-      ></div> */}
+    <div
+      style={{
+        background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(https://image.tmdb.org/t/p/original/${
+          info.details.backdrop_path || info.details.profile_path
+        })`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        // filter: "blur(4px)",
+      }}
+      className="relative h-[155vh] w-screen px-[5%] "
+    >
 
       <div className=" text-zinc-100">
         <nav className="h-[10vh] w-full flex gap-10 text-2xl items-center">
@@ -103,7 +108,7 @@ const MovieDetails = () => {
               className="bg-[#aed6dc] p-4  rounded text-[#4a536b] font-semibold "
               to={`${pathname}/trailer`}
             >
-              <i class="ri-play-fill"></i> Play Trailer
+              <i className="ri-play-fill"></i> Play Trailer
             </Link>
           </div>
         </div>
@@ -111,8 +116,9 @@ const MovieDetails = () => {
           {info.watchproviders && info.watchproviders.flatrate && (
             <div className="flex gap-x-10 items-center">
               <h1>Available on Platforms</h1>
-              {info.watchproviders.flatrate.map((w) => (
+              {info.watchproviders.flatrate.map((w, i) => (
                 <img
+                key={i}
                   title={w.provider_name}
                   className="w-[5vh] h-[5vh] rounded-md"
                   src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
@@ -125,8 +131,9 @@ const MovieDetails = () => {
           {info.watchproviders && info.watchproviders.rent && (
             <div className="flex gap-x-10 items-center">
               <h1>Available for Rent</h1>
-              {info.watchproviders.rent.map((w) => (
+              {info.watchproviders.rent.map((w, i) => (
                 <img
+                key={i}
                   title={w.provider_name}
                   className="w-[5vh] h-[5vh] rounded-md"
                   src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
@@ -139,8 +146,9 @@ const MovieDetails = () => {
           {info.watchproviders && info.watchproviders.buy && (
             <div className="flex gap-x-10 items-center">
               <h1>Available to Buy</h1>
-              {info.watchproviders.buy.map((w) => (
+              {info.watchproviders.buy.map((w, i) => (
                 <img
+                key={i}
                   title={w.provider_name}
                   className="w-[5vh] h-[5vh] rounded-md"
                   src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
@@ -152,9 +160,7 @@ const MovieDetails = () => {
         </div>
 
         <hr className="mt-10 mb-5 border-none h-[1px] bg-zinc-200" />
-        <h1 className="text-3xl font-semibold text-white">
-          Recommendations{" "}
-        </h1>
+        <h1 className="text-3xl font-semibold text-white">Recommendations </h1>
         <HorizontalCards
           data={info.recommendations ? info.recommendations : info.similar}
         />
