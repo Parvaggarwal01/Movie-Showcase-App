@@ -43,15 +43,16 @@ const Topnav = () => {
           {searches.length > 0 ? (
             searches.map((s, i) => (
               <Link
+              to={`/${s.media_type}/details/${s.id}`}
                 key={i}
                 className="text-zinc-400 hover:text-[#4a536b] hover:bg-[#aed6dc] duration-300 font-semibold inline-block w-full px-4 py-3 flex justify-start items-center border-b border-zinc-100"
               >
                 <img
-                  className="w-[8vh] h-[8vh] object-cover rounded mr-4 shadow-lg"
+                  className="w-[8vh] h-[12vh] object-cover rounded mr-4 shadow-lg"
                   src={
-                    s.backdrop_path || s.profile_path
+                    s.poster_path || s.backdrop_path || s.profile_path
                       ? `https://image.tmdb.org/t/p/original/${
-                          s.backdrop_path || s.profile_path
+                        s.poster_path || s.backdrop_path || s.profile_path
                         }`
                       : noimage
                   }
