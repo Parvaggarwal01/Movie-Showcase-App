@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asynccloadmovie, removemovie } from "../store/actions/movieActions";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import Loading from "./Loading";
 import HorizontalCards from "../components/templates/HorizontalCards";
 
@@ -20,21 +20,21 @@ const MovieDetails = () => {
   }, [dispatch, id]);
 
   return info ? (
-    <div className="relative h-[155vh] w-screen px-[5%]">
-      <div
-        style={{
-          background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(https://image.tmdb.org/t/p/original/${
-            info.details.backdrop_path || info.details.profile_path
-          })`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          filter: "blur(4px)",
-        }}
+    <div style={{
+      background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(https://image.tmdb.org/t/p/original/${
+        info.details.backdrop_path || info.details.profile_path
+      })`,
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      // filter: "blur(4px)",
+    }} className="relative h-[155vh] w-screen px-[5%] ">
+      {/* <div
+        
         className="absolute inset-0 z-0"
-      ></div>
+      ></div> */}
 
-      <div className="relative z-10 text-zinc-100">
+      <div className=" text-zinc-100">
         <nav className="h-[10vh] w-full flex gap-10 text-2xl items-center">
           <Link
             onClick={() => navigate(-1)}
@@ -60,7 +60,7 @@ const MovieDetails = () => {
 
         <div className="w-full  flex">
           <img
-            className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[55vh] object-cover z-10 relative"
+            className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[55vh] object-cover "
             src={`https://image.tmdb.org/t/p/original/${
               info.details.poster_path || info.details.backdrop_path
             }`}
@@ -158,6 +158,8 @@ const MovieDetails = () => {
         <HorizontalCards
           data={info.recommendations ? info.recommendations : info.similar}
         />
+
+        <Outlet />
       </div>
     </div>
   ) : (
